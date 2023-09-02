@@ -1,0 +1,20 @@
+version: "3"
+services:
+  backend:
+    build: ./team-availability-system-server
+    image: availability-system-server
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - MONGO_URI=mongodb+srv://yonatansalmon:yonatansalmon@availabilitycluster.8plkdxo.mongodb.net/
+      - SECRET_KEY=fasfa31t32qt
+
+  frontend:
+    build: ./team-availability-system-client
+    image: availability-system
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:5000
